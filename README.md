@@ -12,13 +12,12 @@ This repository provides scripts and instructions for building ROS Noetic from s
 - Python 3
 - Git
 - Build tools (gcc, g++, cmake)
-- Sufficient disk space (~10GB for full build)
 
 ## Features
 
 - ROS Noetic built from source for Ubuntu 22.04
 - Gazebo simulation environment
-- Full ROS desktop installation
+- ROS base installation
 - Custom workspace setup
 - All necessary dependencies included
 
@@ -50,110 +49,25 @@ cd ROS-Noetic-Base-Gazebo-Ubuntu-22.04
 
 ```bash
 # Run the installation script
-./install.sh
+./setup_isolated.sh
+./make_all.sh
 ```
-
-Or follow manual build steps if provided in the repository.
 
 ### 4. Source the Environment
 
 ```bash
-source /opt/ros/noetic/setup.bash
-# Or add to ~/.bashrc for automatic sourcing
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-```
-
-## Usage
-
-### Creating a Workspace
-
-```bash
-mkdir -p ~/catkin_ws/src
-cd ~/catkin_ws
-catkin_make
-source devel/setup.bash
-```
-
-### Running ROS
-
-```bash
-# Start the ROS master
-roscore
-```
-
-### Launching Gazebo
-
-```bash
-# Launch empty Gazebo world
-roslaunch gazebo_ros empty_world.launch
-
-# Launch with a specific world
-roslaunch gazebo_ros willowgarage_world.launch
-```
-
-### Testing the Installation
-
-```bash
-# Check ROS installation
-rosversion -d
-
-# List available packages
-rospack list
-
-# Run turtlesim example
-rosrun turtlesim turtlesim_node
+unset ROS_DISTRO AMENT_PREFIX_PATH COLCON_PREFIX_PATH CMAKE_PREFIX_PATH LD_LIBRARY_PATH PYTHONPATH ROS_VERSION ROS_PYTHON_VERSION ROS_PACKAGE_PATH && source ~/ros_catkin_ws/install_isolated/setup.bash
 ```
 
 ## Project Structure
 
 ```
 .
-├── install.sh         # Installation script
+├── setup_isolated.sh  # Setup script
+├── make_all.sh        # Make All script
+├── make_specific.sh   # Make Specific Packages script
 ├── README.md          # This file
-└── src/               # Source files and patches (if any)
-```
-
-## Building Custom Packages
-
-```bash
-cd ~/catkin_ws/src
-# Clone or create your package
-catkin_create_pkg my_package rospy roscpp std_msgs
-
-cd ~/catkin_ws
-catkin_make
-source devel/setup.bash
-```
-
-## Troubleshooting
-
-### Python Version Issues
-If you encounter Python-related errors, ensure Python 3 is the default:
-```bash
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
-```
-
-### Missing Dependencies
-```bash
-cd ~/catkin_ws
-rosdep install --from-paths src --ignore-src -r -y
-```
-
-### Build Errors
-Clean and rebuild:
-```bash
-cd ~/catkin_ws
-catkin_make clean
-catkin_make
-```
-
-### Gazebo Not Starting
-```bash
-# Check Gazebo installation
-gazebo --version
-
-# Reset Gazebo configuration
-rm -rf ~/.gazebo
+└── src/               # Source files
 ```
 
 ## Known Issues
@@ -179,4 +93,3 @@ Please check the repository for license information.
 ## Contact
 
 Repository: https://github.com/apt2736/ROS-Noetic-Base-Gazebo-Ubuntu-22.04
-
