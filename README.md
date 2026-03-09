@@ -56,7 +56,7 @@ cd ROS-Noetic-Base-Gazebo-Ubuntu-22.04
 ### 4. Source the Environment
 
 ```bash
-unset ROS_DISTRO AMENT_PREFIX_PATH COLCON_PREFIX_PATH CMAKE_PREFIX_PATH LD_LIBRARY_PATH PYTHONPATH ROS_VERSION ROS_PYTHON_VERSION ROS_PACKAGE_PATH && source ~/ros_catkin_ws/install_isolated/setup.bash
+unset ROS_DISTRO AMENT_PREFIX_PATH COLCON_PREFIX_PATH CMAKE_PREFIX_PATH LD_LIBRARY_PATH PYTHONPATH ROS_VERSION ROS_PYTHON_VERSION ROS_PACKAGE_PATH && source {Your Clone Path}/ROS-Noetic-Base-Gazebo-Ubuntu-22.04/install_isolated/setup.bash
 ```
 
 ## Project Structure
